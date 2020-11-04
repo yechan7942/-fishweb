@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.sesoc.good.dao.BoardMapper">
+<insert id="listBoard" parameterType="board">
+		insert  into freeboard
+		(boardnum,
+		id,
+		title,
+		contents
+		)
+		values
+		( freeboard_seq.nextval
+		,#{id}
+		,#{title}
+		,#{contents}
+		
+		)
+	</insert>
+
+<select id="getTotal" parameterType="string" resultType="int">
+	 select
+	 count(*)
+	 from freeboard
+	 <if test="_parameter !=null">
+	 where
+	 title like '%'||#{searchText}||'%'
+	 </if>
+		
+	</select>
+	
+	<select id="pagingBoard" parameterType="string" resultType="board">
+select
+boardnum
+,id
+,title
+,to_char(inputdate, 'YYYY-MM-DD') inputdate
+,hits
+from
+freeboard
+<if test="_parameter!=null">
+where title like '%'||#{searchText}||'%'
+</if>
+order by boardnum desc
+</select>
+
+<select id="readOne" resultType="board">
+		select
+		boardnum
+		,id
+		,title
+		,hits
+		,contents
+		,to_char(inputdate, 'YYYY-MM-DD') inputdate		
+		from freeboard
+		where boardnum = #{boardnum}
+
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

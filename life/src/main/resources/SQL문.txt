@@ -1,0 +1,32 @@
+create table member (
+	id			varchar2(20)    primary key,	--회원ID
+	password	varchar2(20)    not null,		--비밀번호
+	name		varchar2(20)    not null,		--이름
+	phone		varchar2(20),				    --전화번호
+	email		varchar2(50)				    --이메일주소
+);
+
+create table guestbook(
+	num	 number	 	primary key,
+	name 	varchar2(20) 	not null,
+	password varchar2(20) 	not null,
+	contents 	varchar2(200) 	not null,
+	inputdate date default    	sysdate
+);
+create sequence guestbook_seq;
+create table freeboard (
+	boardnum	number          primary key,			--글번호
+	id			varchar2(20)    not null, 		--작성자ID
+	title		varchar2(200)   not null,		--제목
+	contents	varchar2(2000)  not null, 	--내용
+	inputdate	date default    sysdate, 		--작성일,
+	hits		number default 0			--조회수
+	);
+   create sequence freeboard_seq;
+
+ create table userreply(
+	num		number primary key,
+	name	varchar2(20) not null,
+	text	varchar2(200) not null
+);
+create sequence userreply_seq;

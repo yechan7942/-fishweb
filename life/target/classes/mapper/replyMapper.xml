@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.sesoc.good.dao.ReplyMapper">
+
+<insert id="insert" parameterType="reply">
+	insert 
+	 into userreply
+	(
+		num
+		, name
+		, text
+	)
+	values 
+	(
+		userreply_seq.nextval
+		, #{name}
+		, #{text}
+	)
+</insert>
+
+<select id="list" resultType="reply">
+    select * from userreply order by num    
+</select>
+
+<insert id="delete" parameterType="int">
+	delete from userreply where num = #{num}
+</insert>
+
+</mapper>
